@@ -7,11 +7,12 @@
       const response=await originalFetch(new URL('teams-data.json',location.href),{cache:'no-store'});
       if(!response.ok)return response;
       const data=await response.json();
-      return Response.json({teams:[...data.teams,...saved()],source:'Committee review snapshot',updated:new Date().toISOString()});
+      const mine=saved(),ids=new Set(mine.map(t=>t.id));
+      return Response.json({teams:[...data.teams.filter(t=>!ids.has(t.id)),...mine],source:'Committee review snapshot',updated:new Date().toISOString()});
     }
     if(url.origin===location.origin&&url.pathname==='/api/registrations'&&options.method==='POST'){
       const body=JSON.parse(options.body),d=body.draft,teams=saved();
-      const team={id:body.id,registered:new Date().toISOString(),team:d.team,location:d.homeLocation,sponsor:d.teamSponsor,division:d.division,goal:Number(d.goal),beneficiary:body.beneficiary,dancer:d.candidateName,title:d.candidateTitle,story:d.story,status:'Demo — browser only'};
+      const team={id:body.id,registered:new Date().toISOString(),team:d.team,location:d.homeLocation,sponsor:d.teamSponsor,division:d.division,goal:Number(d.goal),beneficiary:body.beneficiary,dancer:d.candidateName,title:d.candidateTitle,story:d.story,status:'Demo — browser only',form:{...d,beneficiaryId:body.beneficiaryId||'',cardVersion:body.cardVersion||'',cardRate:body.cardRate||'',tableTier:body.tableTier||''}};
       const index=teams.findIndex(t=>t.id===team.id);
       if(index<0)teams.push(team);else teams[index]=team;
       localStorage.setItem(key,JSON.stringify(teams));
