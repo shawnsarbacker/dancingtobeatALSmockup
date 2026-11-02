@@ -20,7 +20,7 @@ $('back').onclick=()=>{const checked=document.querySelector('[name=answer]:check
 $('restart').onclick=()=>{current=0;answers=[null,null,null];$('result').classList.add('hidden');$('guideForm').classList.remove('hidden');render()};
 $('use').onclick=()=>{try{const draft=JSON.parse(localStorage.getItem('dtb-team-draft')||'{}');draft.division=recommendation.name;draft.divisionGuideAnswers=answers;draft.divisionPlacementStatus='Pending organizer acceptance';localStorage.setItem('dtb-team-draft',JSON.stringify(draft));location.href='registration.html'}catch{$('saveStatus').textContent='Your browser could not save this choice. Return to your team and select '+recommendation.name+' from the division dropdown.'}};
 render();
-</script><script src="tickets.js?v=4" defer></script><p style="text-align:center;padding:12px;font:12px sans-serif">Committee review mockup · Payments and emails are simulated. Test registrations stay in this browser.</p></body></html>
+</script><script src="tickets.js?v=3" defer></script><p style="text-align:center;padding:12px;font:12px sans-serif">Committee review mockup · Payments and emails are simulated. Test registrations stay in this browser.</p></body></html>
 
 
 
