@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fundraise for a charity · Dancing to Beat ALS</title>
+<link rel="stylesheet" href="flow.css?v=1"><link rel="stylesheet" href="theme.css?v=electric-palette-v5"></head>
+<body><header><a href="home.html" class="banner-link" aria-label="Go to home page" style="display:block;line-height:0"><img class="event-banner" src="event-header.png?v=panoramic-v2" alt="Dancing to Beat ALS — ballroom couple with electric blue and purple light trails and a glowing city skyline"></a><div class="header-bar"><div class="brand">DANCING TO BEAT ALS<small>MOVE TOGETHER. MAKE A DIFFERENCE.</small></div><a href="about.html" style="border:0">A program of ALS Catalyst Foundation</a><a href="how-it-works.html">How It Works</a><a href="teams.html">Charities</a><a href="faq.html">FAQ</a><a href="tickets.html">Tickets &amp; Tables</a><a href="about.html">Why We Dance</a></div></header>
+<main>
+<div class="eyebrow">GOOD PEOPLE. GREAT MOVES. ONE CAUSE.</div>
+<h1>Fundraise for a charity.</h1>
+<p class="intro">Pick a participating ALS charity and start a page on your own, with family or friends, or with your company. Every gift to your page goes directly to that charity and counts toward its campaign.</p>
+<p class="request-link">Represent an ALS nonprofit? <a href="registration.html">Enter your charity instead →</a></p>
+<div id="editBanner" class="hidden" role="status" style="margin:0 0 18px;padding:12px 16px;border-radius:8px;background:#eceefa;border:1px solid #cdd2e9;font-size:14px">Editing <strong id="editName"></strong>. Change any details, then save. <a href="fundraise.html" style="color:var(--green);font-weight:650">Start a new page instead</a></div>
+<nav class="steps" aria-label="Fundraising page progress">
+<button type="button" class="step active" data-step="0"><b>1</b>Choose a charity</button>
+<button type="button" class="step" data-step="1"><b>2</b>Your page</button>
+<button type="button" class="step" data-step="2"><b>3</b>About you</button>
+<button type="button" class="step" data-step="3"><b>4</b>Review &amp; create</button>
+</nav>
+<div class="layout"><section>
+<form id="form" novalidate>
+<div class="page" id="page0">
+<h2>Who are you fundraising for?</h2>
+<p class="hint">Choose one participating charity. Your page’s gifts go directly to it.</p>
+<div class="filters"><input id="search" type="search" placeholder="Search charities or locations" aria-label="Search charities"><select id="divFilter" aria-label="Filter by division"><option value="">All divisions</option><option>Discovery</option><option>Care &amp; Support</option><option>Reach</option><option>Grassroots</option></select></div>
+<div class="charity-grid" id="charities"><p class="empty">Loading participating charities…</p></div>
+</div>
+
+<div class="page hidden" id="page1">
+<h2>Set up your page.</h2>
+<p class="hint">A few details now. You can change them later.</p>
+<label for="name">Page or team name *</label><input id="name" maxlength="80" required placeholder="e.g., The Hope Hustlers">
+<label for="teamType">Who’s fundraising? *</label>
+<select id="teamType"><option value="">Choose one</option><option>Individual</option><option>Family team</option><option>Community team</option><option>Company team</option></select>
+<div id="companyBlock" class="hidden"><label for="company">Company name *</label><input id="company" maxlength="120"><p class="field-note">Company teams count toward the charity’s total and never change its division. Matching gifts count too.</p></div>
+<label for="location">Location</label><input id="location" maxlength="120" placeholder="City, state">
+<label for="goal">Fundraising goal *</label><div class="amount"><span>$</span><input id="goal" type="number" min="0" step="500" required></div>
+<div class="choices" id="goalChoices"></div>
+<label for="story">Why you’re fundraising <span>(optional)</span></label><textarea id="story" maxlength="600"></textarea>
+</div>
+
+<div class="page hidden" id="page2">
+<h2>About you.</h2>
+<p class="hint">You’ll manage this page. The charity you choose can see that you’re fundraising for it.</p>
+<div class="two"><div><label for="leadFirst">First name *</label><input id="leadFirst" maxlength="60" required></div>
+<div><label for="leadLast">Last name *</label><input id="leadLast" maxlength="60" required></div></div>
+<label for="leadEmail">Email *</label><input id="leadEmail" type="email" maxlength="120" required>
+</div>
+
+<div class="page hidden" id="page3">
+<h2>Review and create.</h2>
+<dl class="review" id="review"></dl>
+<div class="money-box" id="reviewMoney"></div>
+</div>
+
+<p class="message" id="status" role="status" aria-live="polite"></p>
+<div class="buttons"><button type="button" class="secondary" id="back">← Back</button><button type="button" id="next">Continue →</button></div>
+</form>
+<div id="done" class="success hidden" tabindex="-1"><div class="tick">✓</div><h2>Your page is ready.</h2><p id="doneText"></p><p><a href="teams.html" style="color:var(--green);font-weight:650">See all charities and teams →</a></p></div>
+<p class="footnote">Interactive mockup · There’s no fee to start a fundraising page. Pages created here go to the shared review list.</p>
+</section>
+<aside><div class="preview-label"><span>YOUR FUNDRAISING PAGE</span><span>● Live preview</span></div>
+<div class="card"><div class="cover"><small>DANCING TO BEAT ALS</small><strong>A little rhythm. A lot of hope.</strong></div><div class="card-body"><div class="team-icon">♫</div>
+<span class="badge" id="pType">Fundraising page</span><h3 id="pName">Your page</h3>
+<p class="preview-candidate" id="pCharity">Choose a charity</p>
+<p class="story" id="pStory">Tell people why you’re fundraising.</p>
+<div class="bar"></div><div class="totals"><span><b>$0</b> raised</span><span id="pGoal">Goal to be set</span></div>
+<div class="money-box">Gifts go directly to <b id="pRecipient">the charity you choose</b>. ALS Catalyst takes no share of gifts to charity campaigns.</div></div></div>
+</aside></div>
+</main>
+<p style="text-align:center;padding:12px;font:12px sans-serif">Committee review mockup · No payments are taken and no emails are sent. Pages are shared with everyone reviewing this site.</p>
+<script>
+const $=id=>document.getElementById(id);
+const FIELDS=['name','teamType','company','location','goal','story','leadFirst','leadLast','leadEmail'];
+const money=n=>'$'+Number(n||0).toLocaleString('en-US');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let step=0,charities=[],charityId='',editId=new URLSearchParams(location.search).get('edit')||'';
+const charity=()=>charities.find(c=>c.id===charityId);
+[1000,2500,5000,10000,25000].forEach(v=>{const b=document.createElement('button');b.type='button';b.textContent=money(v);b.onclick=()=>{$('goal').value=v;update();save()};$('goalChoices').append(b)});
+function data(){const d={};FIELDS.forEach(f=>d[f]=$(f).value.trim());d.charityId=charityId;return d}
+function save(){if(editId)return;try{localStorage.setItem('dtb-team-draft-v2',JSON.stringify(data()))}catch{}}
+function apply(d){FIELDS.forEach(f=>{if(d[f]!==undefined&&d[f]!==null)$(f).value=d[f]});charityId=d.charityId||charityId}
+function drawCharities(){const q=$('search').value.trim().toLowerCase(),f=$('divFilter').value,box=$('charities');box.innerHTML='';
+ const list=charities.filter(c=>(!f||c.division===f)&&(!q||(c.name+' '+c.location).toLowerCase().includes(q)));
+ if(!list.length){box.innerHTML='<p class="empty">No charities match.</p>';return}
+ for(const c of list){const b=document.createElement('button');b.type='button';b.className='charity-pick'+(c.id===charityId?' selected':'');b.setAttribute('aria-pressed',c.id===charityId);
+  b.innerHTML='<span class="badge">'+esc(c.division)+'</span><b>'+esc(c.name)+'</b><small>'+esc(c.location||'')+(c.dancer?' · Dancer: '+esc(c.dancer):'')+'</small>';
+  b.onclick=()=>{charityId=c.id;drawCharities();update();save()};box.append(b)}}
+function update(){$('companyBlock').classList.toggle('hidden',$('teamType').value!=='Company team');const c=charity();
+ $('pName').textContent=$('name').value.trim()||'Your page';$('pType').textContent=$('teamType').value||'Fundraising page';
+ $('pCharity').textContent=c?'Fundraising for '+c.name+' · '+c.division:'Choose a charity';
+ $('pRecipient').textContent=c?(c.legalRecipient||c.name):'the charity you choose';
+ $('pStory').textContent=$('story').value.trim()||'Tell people why you’re fundraising.';
+ $('pGoal').textContent=+$('goal').value?'of '+money($('goal').value)+' goal':'Goal to be set'}
+function check(s){if(s===0&&!charity())return'Please choose a charity.';
+ if(s===1){if(!$('name').value.trim()){$('name').focus();return'Please name your page.'}if(!$('teamType').value){$('teamType').focus();return'Please choose who’s fundraising.'}if($('teamType').value==='Company team'&&!$('company').value.trim()){$('company').focus();return'Please enter the company name.'}if(!(+$('goal').value>0)){$('goal').focus();return'Please enter a goal.'}}
+ if(s===2){for(const f of['leadFirst','leadLast','leadEmail'])if(!$(f).value.trim()){$(f).focus();return'Please complete the required fields.'}if(!/^\S+@\S+\.\S+$/.test($('leadEmail').value.trim())){$('leadEmail').focus();return'Please enter a valid email.'}}return''}
+function review(){const d=data(),c=charity();const rows=[['Fundraising for',c?c.name+' ('+c.division+')':''],['Page name',d.name],['Who’s fundraising',d.teamType+(d.company?' · '+d.company:'')],['Goal',money(d.goal)],['Page manager',(d.leadFirst+' '+d.leadLast).trim()+' · '+d.leadEmail]];
+ $('review').innerHTML=rows.map(([k,v])=>'<dt>'+k+'</dt><dd>'+esc(v)+'</dd>').join('');
+ $('reviewMoney').innerHTML='Gifts to your page go directly to <b>'+esc(c?(c.legalRecipient||c.name):'')+'</b> and count toward its campaign. ALS Catalyst takes no share of gifts to charity campaigns; a platform processing fee is shown to donors at checkout.'}
+function render(){document.querySelectorAll('.page').forEach((p,i)=>p.classList.toggle('hidden',i!==step));
+ document.querySelectorAll('.step').forEach((b,i)=>{b.classList.toggle('active',i===step);b.setAttribute('aria-current',i===step?'step':'false')});
+ $('back').style.visibility=step?'visible':'hidden';$('next').textContent=step===3?(editId?'Save changes':'Create my page'):'Continue →';if(step===3)review();update()}
+function go(n){$('status').textContent='';step=n;render();window.scrollTo({top:document.querySelector('.steps').offsetTop-10,behavior:'smooth'})}
+document.querySelectorAll('.step').forEach(b=>b.onclick=()=>{const n=+b.dataset.step;if(n>step){for(let s=step;s<n;s++){const e=check(s);if(e){$('status').textContent=e;go(s);return}}}go(n)});
+$('back').onclick=()=>go(Math.max(0,step-1));
+$('next').onclick=async()=>{const e=check(step);if(e){$('status').textContent=e;return}if(step<3){go(step+1);return}
+ if(location.protocol==='file:'){$('status').textContent='Open the review website online to create a page.';return}
+ const id=editId||'T-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
+ $('next').disabled=true;$('status').textContent='Saving to the shared review list…';
+ try{const r=await fetch('/api/registrations',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id,type:'team',data:data()})});const j=await r.json();if(!r.ok)throw new Error(j.error||'Could not save.');
+  const d=data(),c=charity();$('form').classList.add('hidden');document.querySelector('.steps').classList.add('hidden');$('editBanner').classList.add('hidden');
+  $('doneText').textContent=editId?'Your changes to '+d.name+' are saved.':d.name+' is now fundraising for '+c.name+'. Share your page and every gift goes directly to the charity.';
+  $('done').classList.remove('hidden');$('done').focus();try{localStorage.removeItem('dtb-team-draft-v2')}catch{}
+ }catch(err){$('status').textContent=err.message}finally{$('next').disabled=false}};
+$('form').addEventListener('input',()=>{update();save()});$('form').addEventListener('change',()=>{update();save()});
+$('search').oninput=drawCharities;$('divFilter').onchange=drawCharities;
+(async()=>{try{const r=await fetch('/api/participants',{cache:'no-store'}),j=await r.json();charities=(j.charities||[]).sort((a,b)=>a.name.localeCompare(b.name));
+ const q=new URLSearchParams(location.search);
+ if(editId){const t=(j.teams||[]).find(x=>x.id===editId);if(t){apply(t);$('editName').textContent=t.name;$('editBanner').classList.remove('hidden')}else{$('status').textContent='That page could not be found. You can start a new one below.';editId=''}}
+ else{try{const d=JSON.parse(localStorage.getItem('dtb-team-draft-v2')||'null');if(d)apply(d)}catch{}if(q.get('charity')&&charities.some(c=>c.id===q.get('charity')))charityId=q.get('charity')}
+ drawCharities();render()}catch{$('charities').innerHTML='<p class="empty">Open the review website online to load participating charities.</p>'}})();
+render();
+</script>
+</body></html>

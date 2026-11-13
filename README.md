@@ -6,12 +6,14 @@ Team directory data is a snapshot in teams-data.json exported from the working E
 
 The site is not password protected by this source code. noindex requests search engines not to list it; it is not access control.
 
-## Shared team list
+## Shared participant list (Concept v2.2, charity-led model)
 
-Completed test teams are saved to one shared CSV file (`teams.csv`) in Netlify Blobs, so every reviewer sees the same list. The Netlify function in `netlify/functions/teams.mjs` serves:
+Participating charities and the supporter/company teams fundraising for them are saved to one shared CSV file (`participants-v2.csv`) in Netlify Blobs, so every reviewer sees the same list. The Netlify function in `netlify/functions/teams.mjs` serves:
 
-- `GET /api/teams` — the team list for the site
-- `GET /api/teams.csv` — the raw CSV (linked from the Teams page as "Download the team list")
-- `POST /api/registrations` — add a team, or update one that was opened for editing
+- `GET /api/participants` — charities and teams for the site (`/api/teams` is an alias)
+- `GET /api/participants.csv` — the raw CSV (linked from the Charities page)
+- `POST /api/registrations` — add or update a charity application (`type: "charity"`) or a fundraising page (`type: "team"`)
 
-The first time the list is read, it is seeded from `teams-data.json`. The CSV includes captain names and emails entered by testers, so the site should stay behind Netlify visitor access.
+The first read seeds the list from `participants-data.json` (fictional charities and teams). The earlier team list (`teams.csv`) is left untouched in storage. The CSV includes contact details testers enter, so the site should stay behind Netlify visitor access.
+
+Pages: `registration.html` (Enter your charity), `fundraise.html` (Fundraise for a charity), `division-guide.html` (mission-first division helper), `teams.html` (Charities directory).

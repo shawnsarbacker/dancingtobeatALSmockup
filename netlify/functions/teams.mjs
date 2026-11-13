@@ -1,11 +1,12 @@
-// Shared team storage for the committee review site.
-// The team list is one CSV file ("teams.csv") kept in Netlify Blobs, so every
-// reviewer sees the same teams. The first read seeds it from teams-data.json.
+// Shared participant storage for the committee review site (Concept v2.2, charity-led model).
+// Charity campaigns and their fundraising teams live in one CSV file kept in Netlify Blobs,
+// so every reviewer sees the same list. The first read seeds it from participants-data.json.
+// (The earlier team list, teams.csv, is left untouched in storage.)
 import { getStore } from '@netlify/blobs';
-import seed from '../../teams-data.json';
-import { toCsv, parseCsv, rowsFromSeed, rowToTeam, upsert } from '../lib/teams-csv.mjs';
+import seed from '../../participants-data.json';
+import { toCsv, parseCsv, rowsFromSeed, toPublic, upsert } from '../lib/participants-csv.mjs';
 
-const KEY = 'teams.csv';
+const KEY = 'participants-v2.csv';
 const json = (data, status = 200) => Response.json(data, { status, headers: { 'Cache-Control': 'no-store' } });
 
 async function load(store) {
@@ -22,17 +23,17 @@ export default async (req) => {
   const store = getStore({ name: 'committee-review', consistency: 'strong' });
   const path = new URL(req.url).pathname;
   try {
-    if (req.method === 'GET' && path === '/api/teams.csv') {
+    if (req.method === 'GET' && (path === '/api/participants.csv' || path === '/api/teams.csv')) {
       const { rows } = await load(store);
       return new Response(toCsv(rows), { headers: {
         'Content-Type': 'text/csv; charset=utf-8',
-        'Content-Disposition': 'attachment; filename="dancing-to-beat-als-teams.csv"',
+        'Content-Disposition': 'attachment; filename="dancing-to-beat-als-participants.csv"',
         'Cache-Control': 'no-store',
       } });
     }
-    if (req.method === 'GET' && path === '/api/teams') {
+    if (req.method === 'GET' && (path === '/api/participants' || path === '/api/teams')) {
       const { rows } = await load(store);
-      return json({ teams: rows.map(rowToTeam), source: 'Shared committee review list (teams.csv)', updated: new Date().toISOString() });
+      return json({ ...toPublic(rows), source: 'Shared committee review list', updated: new Date().toISOString() });
     }
     if (req.method === 'POST' && path === '/api/registrations') {
       let body;
@@ -44,12 +45,12 @@ export default async (req) => {
         const res = await store.set(KEY, toCsv(result.rows), { onlyIfMatch: etag });
         if (!res || res.modified !== false) return json({ id: result.row.id, saved: true, created: result.created });
       }
-      return json({ error: 'Someone else saved at the same moment. Please click Pay again.' }, 503);
+      return json({ error: 'Someone else saved at the same moment. Please try again.' }, 503);
     }
     return json({ error: 'Not found.' }, 404);
   } catch (e) {
-    return json({ error: 'The shared team list is unavailable right now.' }, 500);
+    return json({ error: 'The shared list is unavailable right now.' }, 500);
   }
 };
 
-export const config = { path: ['/api/teams', '/api/teams.csv', '/api/registrations'] };
+export const config = { path: ['/api/participants', '/api/participants.csv', '/api/teams', '/api/teams.csv', '/api/registrations'] };
